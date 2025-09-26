@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-// Convierte imports en objetos { name, src }
 function importAll(glob) {
   return Object.entries(glob).map(([path, mod]) => {
-    const src = typeof mod === "string" ? mod : mod.default;
-    const fileName = path.split("/").pop().replace(/\.[^/.]+$/, "");
+    const src = typeof mod === 'string' ? mod : mod.default;
+    const fileName = path
+      .split('/')
+      .pop()
+      .replace(/\.[^/.]+$/, '');
     return { name: fileName, src };
   });
 }
 
-// Importaciones dinámicas
-const champions = importAll(import.meta.glob("./assets/champions/*.{png,jpg,jpeg,webp}", { eager: true }));
-const spells = importAll(import.meta.glob("./assets/spells/*.{png,jpg,jpeg,webp}", { eager: true }));
-const boots = importAll(import.meta.glob("./assets/boots/*.{png,jpg,jpeg,webp}", { eager: true }));
-const items = importAll(import.meta.glob("./assets/items/*.{png,jpg,jpeg,webp}", { eager: true }));
-const runes = importAll(import.meta.glob("./assets/runes/*.{png,jpg,jpeg,webp}", { eager: true }));
+const champions = importAll(
+  import.meta.glob('./assets/champions/*.{png,jpg,jpeg,webp}', { eager: true }),
+);
+const spells = importAll(
+  import.meta.glob('./assets/spells/*.{png,jpg,jpeg,webp}', { eager: true }),
+);
+const boots = importAll(import.meta.glob('./assets/boots/*.{png,jpg,jpeg,webp}', { eager: true }));
+const items = importAll(import.meta.glob('./assets/items/*.{png,jpg,jpeg,webp}', { eager: true }));
+const runes = importAll(import.meta.glob('./assets/runes/*.{png,jpg,jpeg,webp}', { eager: true }));
 
-// Funciones random
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandomUnique = (arr, count) => {
   const copy = [...arr];
@@ -47,7 +51,11 @@ function App() {
 
       {/* Campeón */}
       <div className="flex flex-col items-center mb-6">
-        <img src={build.champion.src} alt={build.champion.name} className="w-14 h-14 md:w-22 md:h-22" />
+        <img
+          src={build.champion.src}
+          alt={build.champion.name}
+          className="w-14 h-14 md:w-22 md:h-22"
+        />
         <p className="mt-2 text-lg font-semibold">{build.champion.name}</p>
       </div>
 
